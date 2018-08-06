@@ -24,7 +24,7 @@
 - 1.2.语义匹配模型
      
     [8]深度结构化语义模型（Deep Structured Semantic Models，简称为DSSM）是基于多层神经网络模型搭建的广义语义匹配模型 。其本质上可以实现两种信息实体的语义匹配。基本思想是设置两个映射通路，两个映射通路负责将两种信息实体映射到同一个隐含空间，在这个隐含空间，两种信息实体可以同时进行表示，进一步利用匹配函数进行相似度的刻画。
-    ![avatar](recommend_intro/DSSM.PNG)
+    ![avatar](../img/DSSM.PNG)
     如图展示了一个DSSM的通用示意图，其中Q表示一个Query，D表示一个Document，对应到推荐系统里面的用户和物品。通过级联的深度神经网络模型的映射与变换，最终Query和Document在同一个隐含空间得到了表示，可以使用余弦相似度进行计算。DSSM最初主要用在信息检索领域，用来刻画文档和查询之间的相似度。
     
     [9]随后被用在推荐系统中：一端对应着用户信息，另外一端对应着物品信息 。以DSSM为主的这些工作的基本出发点实际上和浅层嵌入式表示模型非常相似，能够探索用户和物品两种不同的实体在同一个隐含空间内的相似性。其中一个较为关键的地方，就是如何能够融入任务特定的信息(例如物品内容信息)以及模型配置（例如可以使用简单多层神经网络模型或者卷积神经网络模型），从而获得理想的结果。
@@ -33,7 +33,7 @@
 - 2.1.基于用户的原始评分（或者反馈）来挖掘深度的数据模式特征（神经网络矩阵分解）
     
     [10]限制玻尔兹曼机进行评分预测。
-    ![avatar](recommend_intro/限制玻尔兹曼机.PNG)
+    ![avatar](../img/限制玻尔兹曼机.PNG)
     如图所示，其所使用的模型具有一个两层的类二部图结构，其中用户层为隐含层 (h)，可见层为用户的评分信息 (V)，通过非线性关联两层上的数据信息。其中隐含层为二元变量，而用户评分信息被刻画为多项式分布变量。建立用户隐含表示信息以及其评分信息的联合能量函数，然后进行相应的参数求解。该方法的一个主要问题是连接隐含层和评分层的权重参数规模过大（对于大数据集合），也就是权重矩阵W。
         
     [11]优化计算的改进，作者进一步提出使用将W分解为两个低秩矩阵，减小参数规模。不过实验效果表明所提出的方法并没有比基于矩阵分解的方法具有显著的改进，而且参数求解使用较为费时的近似算法。
@@ -41,19 +41,19 @@
     [12]优化改进，Zheng 等人提出使用Neural Autoregressive Distribution Estimator来改进上述问题，该方法不需要显式对于二元隐含变量进行推理，减少了模型复杂度，并且使用排序代价函数来进行参数最优化。实验表明所提出的方法能够取得非常好的效果。
         
     [13]Wu等人使用去噪自动编码模型（Denoising Autoencoder）进行top-N物品推荐，其输入为加入噪声的对于物品的偏好（采纳为1，否则为0），输出为用户对于物品的原始评分，通过学习非线性映射关系来进行物品预测。
-    ![avatar](recommend_intro/去噪自动编码模型.PNG)
+    ![avatar](../img/去噪自动编码模型.PNG)
     如图所示，用户可见的评分数据通过加上噪音后进入输入层，然后通过非线性映射形成隐含层，再由隐含层经映射后重构评分数据。注意，该模型中加入了用户偏好表示(User Node)和偏置表示(Bias Node)。
         
     [14]Devooght提出将协同过滤方法可以看作时间序列的预测问题。
-    ![avatar](recommend_intro/CFRNN.PNG)
+    ![avatar](../img/CFRNN.PNG)
 
     作者提出，传统基于协同过滤的推荐方法，无论基于何种特征，都没有考虑用户历史行为的时间属性，只是将历史行为中的每个item统一考虑。这样处理带来的最大问题在于推荐系统无法分析用户喜好的变化情况，从而给出更符合用户现阶段喜好的推荐结果。那么，如果基于协同过滤“由过去，看未来”的思想，如果将该问题视作序列预测问题，一方面可以更好的分析用户的兴趣爱好的变化情况给出更好的推荐结果，另一方面也可以将在时序预测问题中广泛使用的RNN深度网络模型引入到推荐系统中。
         
     [15]NCF 作者提出一种通用的神经网络协同过滤框架，通过用神经网络结构多层感知机去学习用户-项目之间交互函数替代传统的矩阵分解中的内积运算，从而从数据中学习任意函数（非线性）。
-    ![avatar](recommend_intro/CFDNN.PNG)
+    ![avatar](../img/CFDNN.PNG)
 
     并提出了两种NCF实例：基于线性核的GMF（广义矩阵分解），基于非线性核的MLP。并且将GMF与MLP融合，使他们相互强化。（tf model zoo）
-    ![avatar](recommend_intro/CFDNN2.PNG)
+    ![avatar](../img/CFDNN2.PNG)
 
 
 - 2.2. 深度神经网络模型当做特征变换模块（内容embedding->矩阵分解）
@@ -68,9 +68,9 @@
 
 
 #### 3.排序
-   Deep CTR [https://mp.weixin.qq.com/s/xWqpIHHISSkO97O_fKkb6A]
+   Deep CTR [https:/mp.weixin.qq.com/s/xWqpIHHISSkO97O_fKkb6A]
 
-![avatar](recommend_intro/DeepCTR.PNG)
+![avatar](../img/DeepCTR.PNG)
 
 3.1. 总结（结论先行）
 
@@ -88,7 +88,7 @@
 
     深度排序模型( embedding-神经网络),embedding+MLP 是对于分领域离散特征进行深度学习 CTR 预估的通用框架。深度学习在特征组合挖掘（特征学习）方面具有很大的优势。比如以 CNN 为代表的深度网络主要用于图像、语音等稠密特征上的学习，以 W2V、RNN 为代表的深度网络主要用于文本的同质化、序列化高维稀疏特征的学习。CTR 预估的主要场景是对离散且有具体领域的特征进行学习，所以其深度网络结构也不同于 CNN 与 RNN。
     
-![avatar](recommend_intro/embedding_mlp.PNG)  
+![avatar](../img/embedding_mlp.PNG)  
 
     embedding+MLP 的过程如下： 
 
@@ -100,7 +100,7 @@
     
 3.3. Wide & Deep Network(连续特征->交叉特征+LR、离散特征->onehot->DNN)
 
-![avatar](recommend_intro/WideAndDeepNetwork.PNG)
+![avatar](../img/WideAndDeepNetwork.PNG)
 
     Google 在 2016 年提出的宽度与深度模型（Wide&Deep）在深度学习 CTR 预估模型中占有非常重要的位置，它奠定了之后基于深度学习的广告点击率预估模型的框架。 Wide&Deep将深度模型与线性模型进行联合训练，二者的结果求和输出为最终点击率。其计算图如下： 
 
@@ -112,7 +112,7 @@
     
     Ruoxi Wang 等在 2017 提出的深度与交叉神经网络（Deep & Cross Network，DCN）借鉴了FM的特征点击交叉。DCN 的计算图如下：
 
-![avatar](recommend_intro/DeepAndCrossNetwork.PNG)
+![avatar](../img/DeepAndCrossNetwork.PNG)
 
     DCN 的特点如下：
     1. Deep 部分就是普通的 MLP 网络，主要是全连接。 
@@ -128,7 +128,7 @@
     以上神经网络对同领域离散特征的处理基本是将其嵌入后直接求和，这在一般情况下没太大问题。但其实可以做得更加精细。
     由 Bahdanau et al. (2015) 引入的现代注意力机制，本质上是加权平均（权重是模型根据数据学习出来的），其在机器翻译上应用得非常成功。受注意力机制的启发，Guorui Zhou 等在 2017 年提出了深度兴趣网络（Deep Interest Network，DIN）。DIN 主要关注用户在同一领域的历史行为特征，如浏览了多个商家、多个商品等。DIN 可以对这些特征分配不同的权重进行求和。其网络结构图如下：
  
-![avatar](recommend_intro/DeepInterestNetwork.PNG)  
+![avatar](../img/DeepInterestNetwork.PNG)  
  
     1. 此处采用原论文的结构图，表示起来更清晰。
     2. DIN 考虑对同一领域的历史特征进行加权求和，以加强其感兴趣的特征的影响。
@@ -139,26 +139,26 @@
 3.7. FM -> FNN -> NFM -> PNN -> AFM
     
     LR:
-![avatar](recommend_intro/LR.PNG)  
+![avatar](../img/LR.PNG)  
     
     FM：
-![avatar](recommend_intro/FM2.PNG)  
+![avatar](../img/FM2.PNG)  
     
     FNN：FM隐向量 + 拼接 + MLP
-![avatar](recommend_intro/FNN.PNG)  
+![avatar](../img/FNN.PNG)  
 
     
     NFM：FM隐向量 + 特征交叉（逐元素向量乘法）+ 求和 + MLP
-![avatar](recommend_intro/NFM.PNG)  
+![avatar](../img/NFM.PNG)  
  
     PNN：与NFM类似，特征交叉法采用了向量积的方法 + 拼接 + mlp
-![avatar](recommend_intro/PNN.PNG)  
+![avatar](../img/PNN.PNG)  
 
     AFM：基于NFM的改进，通过在逐元素乘法之后形成的向量进行加权求和（Attention Net），去除了MLP部分直接接一个softmax
-![avatar](recommend_intro/AFM.PNG)  
+![avatar](../img/AFM.PNG)  
 
 3.8. 多任务学习：同时学习多个任务
-![avatar](recommend_intro/MultiTask.PNG)  
+![avatar](../img/MultiTask.PNG)  
 
     - 完全共享网络层的参数
     - 只共享embedding层参数
@@ -174,7 +174,7 @@
     
     (加入用户信息，内容信息，上下文信息的RNN模型)
     TODO
-    此外还有一些基于RNN的优化模型[https://zhuanlan.zhihu.com/p/30720579]
+    此外还有一些基于RNN的优化模型[https:/zhuanlan.zhihu.com/p/30720579]
     
     
     - GRU4REC[22]，使用GRU单元
@@ -194,7 +194,7 @@
 - 深度强化学习
 
 ### 参考
-[[1].深度学习在推荐算法上的应用进展](https://zhuanlan.zhihu.com/p/26237106)
+[[1].深度学习在推荐算法上的应用进展](https:/zhuanlan.zhihu.com/p/26237106)
 
 [2] Tomas Mikolov. Using Neural Networks for Modeling and Representing Natural Languages. COLING (Tutorials) 2014: 3-4
 
@@ -222,7 +222,7 @@
 
 [14]Devooght R, Bersini H. Collaborative filtering with recurrent neural networks[J]. arXiv preprint arXiv:1608.07400, 2016.
 
-[15]He X, Liao L, Zhang H, et al. Neural collaborative filtering[C]//Proceedings of the 26th International Conference on World Wide Web. International World Wide Web Conferences Steering Committee, 2017: 173-182.
+[15]He X, Liao L, Zhang H, et al. Neural collaborative filtering[C]/Proceedings of the 26th International Conference on World Wide Web. International World Wide Web Conferences Steering Committee, 2017: 173-182.
 
 [16] Hao Wang, Naiyan Wang, Dit-Yan Yeung. Collaborative Deep Learning for Recommender Systems. KDD 2015: 1235-1244
 
@@ -250,4 +250,4 @@ Recommendation. (RecSys 2017)
 
 [27] Improved Recurrent Neural Networks for Session-based Recommendations. (DLRS 2016)
 
-[28] Li J, Ren P, Chen Z, et al. Neural attentive session-based recommendation[C]//Proceedings of the 2017 ACM on Conference on Information and Knowledge Management. ACM, 2017: 1419-1428.
+[28] Li J, Ren P, Chen Z, et al. Neural attentive session-based recommendation[C]/Proceedings of the 2017 ACM on Conference on Information and Knowledge Management. ACM, 2017: 1419-1428.

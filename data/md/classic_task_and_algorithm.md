@@ -26,13 +26,13 @@ $$ \qquad sim(x,y) = 1- cosine(x,y) = 1 - \frac{ A \cdot B}{\mid\mid A\mid\mid \
     奇异值分解，通过降维的方法来补全用户-物品评分矩阵，对矩阵中没有出现的值进行估计。缺点是分解前需补全R矩阵的缺失值（比如用全局平均值或用户、物品平均值进行补全），耗费存储大；计算复杂度高。
     
 $$ \qquad R' = U_{m\times m}S_{m\times n}V_{n \times n}^T $$ 
-![avatar](recommend_intro/svd.png)
+![avatar](../img/svd.png)
    
 2.3.2.ALS:
 
     交替最小二乘梯度下降
     
-![avatar](recommend_intro/als算法.png)
+![avatar](../img/als算法.png)
 
     
 $$ \qquad R' = X_{m \times k}Y_{n \times k}^T$$
@@ -45,10 +45,10 @@ $$ \qquad y_i=(X^TX+\lambda I)^{−1}X^Tr(i)$$
    
     支持隐反馈数据（0,1）（加权的正则化矩阵分解）[1]
    
-$$ \qquad L_{WRMF} = \sum\limits_{u,i}c_{ui} \big( p_{ui} - \textbf{x}_{u}^{\intercal} \cdot{} \textbf{y}_{i} \big) ^{2} + \lambda_{x} \sum\limits_{u} \left\Vert \textbf{x}_{u} \right\Vert^{2} + \lambda_{y} \sum\limits_{u} \left\Vert \textbf{y}_{i} \right\Vert^{2}$$   
+$$ \qquad L_{WRMF} = \sum\limits_{u,i}c_{ui} \big( p_{ui} - \textbf{x}_{u}^{\intercal} \cdot{} \textbf{y}_{i} \big) ^{2} + \lambda_{x} \sum\limits_{u} \left\Vert \textbf{x}_{u} \right\Vert^{2} + \lambda_{y} \sum\limits_{u} \left\Vert \textbf{y}_{i} \right\Vert^{2} $$   
 $$ \qquad c_{ui} = 1 + \alpha d_{ui}$$  
-$$ \qquad x_{u} = (Y^{T}C^{u}Y + \lambda I )^{-1}Y^{T}C^{u}r(u)$$  
-$$ \qquad y_{i} = (X^{T}C^{i}X + \lambda I )^{-1}X^{T}C^{i}r(i)$$
+$$ \qquad x_{u} = (Y^{T}C^{u}Y + \lambda I )^{ - 1 }Y^{T}C^{u}r(u)$$  
+$$ \qquad y_{i} = (X^{T}C^{i}X + \lambda I )^{ - 1 }X^{T}C^{i}r(i)$$
  
 2.3.3.PMF
 
@@ -56,7 +56,7 @@ $$ \qquad y_{i} = (X^{T}C^{i}X + \lambda I )^{-1}X^{T}C^{i}r(i)$$
 
     传统的协同过滤方法既不能处理大数据量的推荐，也不能处理只有很少评分的用户。这篇论文提出了著名的概率矩阵分解的方法来解决这个问题。概率矩阵分解的思想是以中线性因子模型，它使用与用户相关的系数，将用户的偏好建模成一个一系列向量的线性组合。
     
-    [博文](https://blog.csdn.net/shenxiaolu1984/article/details/50372909)
+    [博文](https:/blog.csdn.net/shenxiaolu1984/article/details/50372909)
     
 2.3.4.BPMF
 
@@ -112,22 +112,22 @@ $$ \qquad R' = w_0 + \sum_{i=1}^{n}w_i x_i + \sum_{i=1}^{n}\sum_{j=i+1}^n<V_{i,f
 #### 4.2.基于session的模型（可作召回或端到端推荐）：
    马尔科夫决策过程[9]、隐马尔科夫、条件随机场
 
-[1] Hu Y, Koren Y, Volinsky C. Collaborative filtering for implicit feedback datasets[C]//Data Mining, 2008. ICDM'08. Eighth IEEE International Conference on. Ieee, 2008: 263-272.
+[1] Hu Y, Koren Y, Volinsky C. Collaborative filtering for implicit feedback datasets[C] Mining, 2008. ICDM'08. Eighth IEEE International Conference on. Ieee, 2008: 263-272.
 
 [2] R. Salakhutdinov and A. Mnih. Probabilistic matrix factorization. Advances in Neural Information Processing Systems, 20:1257–1264, 2008.
 
-[3] Salakhutdinov R, Mnih A. Bayesian probabilistic matrix factorization using Markov chain Monte Carlo[C]//Proceedings of the 25th international conference on Machine learning. ACM, 2008: 880-887.
+[3] Salakhutdinov R, Mnih A. Bayesian probabilistic matrix factorization using Markov chain Monte Carlo[C]/Proceedings of the 25th international conference on Machine learning. ACM, 2008: 880-887.
 
 [4] Chen T, Zhang W, Lu Q, et al. SVDFeature: a toolkit for feature-based collaborative filtering[J]. Journal of Machine Learning Research, 2012, 13(Dec): 3619-3622.
 
 [5] Rendle S. Factorization machines with libfm[J]. ACM Transactions on Intelligent Systems and Technology (TIST), 2012, 3(3): 57.
 
-[6] Juan Y, Zhuang Y, Chin W S, et al. Field-aware factorization machines for CTR prediction[C]//Proceedings of the 10th ACM Conference on Recommender Systems. ACM, 2016: 43-50.
+[6] Juan Y, Zhuang Y, Chin W S, et al. Field-aware factorization machines for CTR prediction[C]/Proceedings of the 10th ACM Conference on Recommender Systems. ACM, 2016: 43-50.
 
 [7] Adams, Ryan Prescott, George E. Dahl, and Iain Murray. “Incorporating 
 side information in probabilistic matrix factorization with gaussian 
 processes.” arXiv preprint arXiv:1003.4944 (2010).
 
-[8] Wang C, Blei D M. Collaborative topic modeling for recommending scientific articles[C]//Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining. ACM, 2011: 448-456.
+[8] Wang C, Blei D M. Collaborative topic modeling for recommending scientific articles[C]/Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining. ACM, 2011: 448-456.
 
 [9] Markov decision Processes （MDPs）（Shani et al., 2002）
